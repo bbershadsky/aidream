@@ -4,11 +4,13 @@ import {
   HttpError,
   Refine,
 } from "@refinedev/core";
+import { dataProvider as DP, liveProvider } from "@refinedev/appwrite";
+
 import routerProvider from "@refinedev/react-router-v6";
 import { HashRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import axios, { AxiosRequestConfig } from "axios";
 
-import { authProvider } from "./authProvider";
+// import { authProvider } from "./authProvider";
 import { dataProvider } from "./dataProvider";
 
 import { Layout } from "./components";
@@ -18,8 +20,9 @@ import { ProfilePage } from "./pages/profile";
 import { SettingsPage } from "./pages/settings";
 import { EditorPage, EditArticlePage } from "./pages/editor";
 import { ArticlePage } from "./pages/article";
-
+import { appwriteClient, resources } from "../utility";
 import { TOKEN_KEY } from "./constants";
+import { authProvider } from "./auth-provider";
 
 const axiosInstance = axios.create();
 
@@ -61,8 +64,19 @@ function App() {
     <HashRouter>
       <Refine
         routerProvider={routerProvider}
-        dataProvider={dataProvider(axiosInstance)}
-        authProvider={authProvider(axiosInstance)}
+        dataProvider={{
+          default: dataProvider(axiosInstance),
+          appwrite: DP(appwriteClient, {
+            databaseId: resources.databaseId,
+          }),
+        }}
+        liveProvider={liveProvider(appwriteClient, {
+          databaseId: resources.databaseId,
+        })}
+        authProvider={authProvider}
+        // resources={[
+
+        // ]}
       >
         <Routes>
           <Route
