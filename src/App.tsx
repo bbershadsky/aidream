@@ -13,6 +13,10 @@ import axios, { AxiosRequestConfig } from "axios";
 // import { authProvider } from "./authProvider";
 import { dataProvider } from "./dataProvider";
 
+import "@mantine/core/styles.css";
+import type { AppProps } from "next/app";
+import { createTheme, MantineProvider } from "@mantine/core";
+
 import { Layout } from "./components";
 import { LoginPage, RegisterPage } from "./pages/auth";
 import { HomePage } from "./pages/home";
@@ -59,50 +63,56 @@ axiosInstance.interceptors.response.use(
 
 export { axiosInstance };
 
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
+
 function App() {
   return (
-    <HashRouter>
-      <Refine
-        routerProvider={routerProvider}
-        dataProvider={{
-          default: dataProvider(axiosInstance),
-          appwrite: DP(appwriteClient, {
+    <MantineProvider theme={theme}>
+      <HashRouter>
+        <Refine
+          routerProvider={routerProvider}
+          dataProvider={{
+            default: dataProvider(axiosInstance),
+            appwrite: DP(appwriteClient, {
+              databaseId: resources.databaseId,
+            }),
+          }}
+          liveProvider={liveProvider(appwriteClient, {
             databaseId: resources.databaseId,
-          }),
-        }}
-        liveProvider={liveProvider(appwriteClient, {
-          databaseId: resources.databaseId,
-        })}
-        authProvider={authProvider}
-        // resources={[
+          })}
+          authProvider={authProvider}
+          // resources={[
 
-        // ]}
-      >
-        <Routes>
-          <Route
-            element={
-              <Layout>
-                <Outlet />
-              </Layout>
-            }
-          >
-            <Route index element={<HomePage />} />
+          // ]}
+        >
+          <Routes>
+            <Route
+              element={
+                <Layout>
+                  <Outlet />
+                </Layout>
+              }
+            >
+              <Route index element={<HomePage />} />
 
-            <Route path="editor" element={<EditorPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="article/:slug" element={<ArticlePage />} />
-            <Route path="profile/:username" element={<ProfilePage />} />
-            <Route path="profile/:username/:page" element={<ProfilePage />} />
-            <Route path="editor/:slug" element={<EditArticlePage />} />
+              <Route path="editor" element={<EditorPage />} />
+              <Route path="settings" element={<SettingsPage />} />
+              <Route path="article/:slug" element={<ArticlePage />} />
+              <Route path="profile/:username" element={<ProfilePage />} />
+              <Route path="profile/:username/:page" element={<ProfilePage />} />
+              <Route path="editor/:slug" element={<EditArticlePage />} />
 
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
 
-            <Route path="*" element={<ErrorComponent />} />
-          </Route>
-        </Routes>
-      </Refine>
-    </HashRouter>
+              <Route path="*" element={<ErrorComponent />} />
+            </Route>
+          </Routes>
+        </Refine>
+      </HashRouter>
+    </MantineProvider>
   );
 }
 
