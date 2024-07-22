@@ -87,29 +87,35 @@ Add the resulting Database and Collection IDs to `.env`
 | column name            | type      | required | array | default value |
 | ---------------------- | --------- | -------- | ----- | :-----------: |
 | name                   | string255 | true     | false |       -       |
-| description            | string255 | false    | false |       -       |
+| username               | string255 | true     | false |       -       |
+| bio                    | string255 | false    | false |       -       |
 | email                  | email     | false    | false |       -       |
 | language               | string20  | false    | true  |       -       |
-| profilePhoto           | string255 | false    | false |       -       |
+| image                  | string255 | false    | false |       -       |
+| token                  | string255 | false    | false |       -       |
 | votesUP                | number    | false    | false |       0       |
 | votesDN                | number    | false    | false |       0       |
-| country                | string50  | false    | false |       -       |
-| role                   | string50  | false    | false |       -       |
+| country                | string    | false    | false |       -       |
+| role                   | string    | false    | false |       -       |
 | address                | string255 | false    | false |       -       |
 | preferredPaymentMethod | string255 | false    | false |       -       |
 
-## Projects Table
+## Projects (Article) Table
 
-| column name | type      | required | array | default value |
-| ----------- | --------- | -------- | ----- | :-----------: |
-| userID      | string20  | true     | false |       -       |
-| name        | string255 | true     | false |       -       |
-| description | string255 | false    | false |       -       |
-| email       | email     | false    | false |       -       |
-| language    | string50  | false    | false |       -       |
-| currency    | string50  | false    | false |       -       |
-| imageURL    | string255 | false    | false |       -       |
-| slug        | string100 | false    | false |       -       |
+| column name    | type        | required | array | default value |
+| -------------- | ----------- | -------- | ----- | :-----------: |
+| slug           | string255   | false    | false |       -       |
+| author         | string50    | true     | false |       -       |
+| name           | string255   | false    | false |       -       |
+| title          | string255   | false    | false |       -       |
+| body           | string10000 | false    | false |       -       |
+| description    | string10000 | false    | false |       -       |
+| favorited      | boolean     | false    | false |       -       |
+| favoritesCount | integer     | false    | false |       0       |
+| tagList        | string50    | false    | true  |       0       |
+| language       | string50    | false    | false |       -       |
+| currency       | string50    | false    | false |       -       |
+| image          | string255   | false    | false |       -       |
 
 ## Tech Stack
 

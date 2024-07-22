@@ -35,3 +35,9 @@ export interface IAuthor {
   image: string;
   username: string;
 }
+
+export interface LanguageItem {
+  key: string;
+  label: string;
+  flag: string;
+}

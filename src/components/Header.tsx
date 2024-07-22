@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
       <nav className="navbar navbar-light">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            conduit
+            R A.I Dream
           </Link>
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
