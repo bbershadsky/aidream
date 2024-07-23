@@ -12,9 +12,9 @@ export const ContactShow = () => {
         "id",
         "name",
         "email",
-        { company: ["id", "name"] },
+        // { company: ["id", "name"] },
         "jobTitle",
-        "phone",
+        // "phone",
         "status",
       ],
     },
@@ -30,12 +30,12 @@ export const ContactShow = () => {
       <TextField value={record?.name} />
       <Title level={5}>Email</Title>
       <EmailField value={record?.email} />
-      <Title level={5}>Company</Title>
-      <TextField value={record?.company?.name} />
+      {/* <Title level={5}>Company</Title> */}
+      {/* <TextField value={record?.company?.name} /> */}
       <Title level={5}>Job Title</Title>
       <TextField value={record?.jobTitle} />
-      <Title level={5}>Phone</Title>
-      <TextField value={record?.phone} />
+      {/* <Title level={5}>Phone</Title>
+      <TextField value={record?.phone} /> */}
       <Title level={5}>Status</Title>
       <TextField value={record?.status} />
     </Show>

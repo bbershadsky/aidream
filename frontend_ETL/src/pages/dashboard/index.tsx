@@ -1,23 +1,23 @@
 import { Row, Col } from "antd";
 
 import { MetricCard } from "../../components/metricCard";
-import { DealChart } from "../../components/dealChart";
+// import { DealChart } from "../../components/dealChart";
 
 export const Dashboard = () => {
   return (
     <Row gutter={[32, 32]}>
       <Col xs={24} sm={24} xl={8}>
-        <MetricCard variant="companies" />
+        <MetricCard variant="66a031420005f3d71bd7" />
       </Col>
       <Col xs={24} sm={24} xl={8}>
-        <MetricCard variant="contacts" />
+        <MetricCard variant="66a0301600057f98bdc8" />
       </Col>
       <Col xs={24} sm={24} xl={8}>
-        <MetricCard variant="deals" />
+        <MetricCard variant="669e459d001d91a860c3" />
       </Col>
-      <Col span={24}>
+      {/* <Col span={24}>
         <DealChart />
-      </Col>
+      </Col> */}
     </Row>
   );
 };

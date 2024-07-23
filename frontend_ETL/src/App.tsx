@@ -107,13 +107,14 @@ const App: React.FC = () => {
                 },
               },
               {
-                name: "proposals",
+                name: "669e459d001d91a860c3",
                 list: "/proposals",
                 create: "/proposals/create",
                 edit: "/proposals/edit/:id",
                 show: "/proposals/show/:id",
                 meta: {
                   canDelete: true,
+                  label: "Proposals",
                   icon: (
                     <ShopOutlined
                       onPointerEnterCapture={undefined}
@@ -123,13 +124,14 @@ const App: React.FC = () => {
                 },
               },
               {
-                name: "companies",
+                name: "66a031420005f3d71bd7",
                 list: "/companies",
                 create: "/companies/create",
                 edit: "/companies/edit/:id",
                 show: "/companies/show/:id",
                 meta: {
                   canDelete: true,
+                  label: "Companies",
                   icon: (
                     <ShopOutlined
                       onPointerEnterCapture={undefined}
@@ -139,13 +141,14 @@ const App: React.FC = () => {
                 },
               },
               {
-                name: "contacts",
+                name: "66a0301600057f98bdc8",
                 list: "/contacts",
                 create: "/contacts/create",
                 edit: "/contacts/edit/:id",
                 show: "/contacts/show/:id",
                 meta: {
-                  canDelete: true,
+                  // canDelete: true,
+                  label: "Contacts",
                   icon: (
                     <TeamOutlined
                       onPointerEnterCapture={undefined}

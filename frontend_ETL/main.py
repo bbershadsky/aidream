@@ -42,7 +42,8 @@ functions = Functions(client)
 users = Users(client)
 
 database_id = os.getenv('VITE_APPWRITE_DATABASE_ID')
-collection_id = os.getenv('VITE_APPWRITE_COLLECTION_ID')
+collection_id = '66a031420005f3d71bd7'
+
 projects_collection_name = os.getenv('APPWRITE_PROJECTS_COLLECTION_NAME')
 database_name = os.getenv('APPWRITE_DATABASE_NAME')
 document_id = None
@@ -54,7 +55,7 @@ file_id = None
 document_id = None
 
 users_collection_id = os.getenv('VITE_APPWRITE_USER_COLLECTION_ID')
-users_collection_name = os.getenv('VITE_APPWRITE_USER_COLLECTION_NAME')
+users_collection_name = os.getenv('VITE_APPWRITE_USERS_COLLECTION_NAME')
 
 @time_tracker
 def create_database():
@@ -64,11 +65,11 @@ def create_database():
 def create_collection():
     global collection_id
 
-    p("Running Projects Create Collection API")
+    p("Running Create Collection API")
     response = databases.create_collection(
         database_id,
         collection_id=ID.unique(),
-        name=os.getenv('APPWRITE_PROJECTS_COLLECTION_NAME'),
+        name=os.getenv('APPWRITE_USERS_COLLECTION_NAME'),
         document_security=True,
         permissions=[
             Permission.read(Role.any()),
@@ -83,33 +84,48 @@ def create_collection():
 
 @time_tracker
 def create_attributes(collection_id):
-    attributes = [
-        ("slug", "string"),
-        ("author", "string50"),
-        ("body", "string"),
+    # Proposal
+    # attributes = [
+    #     ("slug", "string"),
+    #     ("author", "string50"),
+    #     ("body", "string"),
+    #     ("name", "string"),
+    #     ("title", "string"),
+    #     ("description", "string"),
+    #     ("language", "string50"),
+    #     ("currency", "string50"),
+    #     ("image", "string"),
+    #     ("body", "string10000"),
+    #     ("description", "string10000"),
+    #     ("favorited", "boolean"),
+    #     ("favoritesCount", "integer"),
+    #     # ("tagList", "string50"),
+    # ]
+
+    # companies
+    attributes = [ 
         ("name", "string"),
-        ("title", "string"),
-        ("description", "string"),
-        ("language", "string50"),
-        ("currency", "string50"),
-        ("image", "string"),
-        ("body", "string10000"),
-        ("description", "string10000"),
-        ("favorited", "boolean"),
-        ("favoritesCount", "integer"),
-        # ("tagList", "string50"),
+        ("businessType", "string"),
+        ("bio", "string"),
+        ("country", "string"),
+        ("website", "string"),
+        ("companySize", "integer"),
     ]
     # users
     # attributes = [ 
     #     ("name", "string"),
     #     ("username", "string"),
+    #     ("linkedinUrl", "string"),
     #     ("bio", "string"),
     #     ("email", "email"),
     #     ("language", "string20"),
     #     ("image", "string"),
+    #     ("jobTitle", "string"),
+    #     ("status", "string"),
     #     ("token", "string"),
     #     ("country", "string"),
     #     ("address", "string"),
+    #     ("PGPKey", "string"),
     #     ("preferredPaymentMethod", "string"),
     #     ("role", "string"),
     #     ("votesUP", "integer"),
@@ -125,7 +141,7 @@ def create_attributes(collection_id):
                 databases.create_string_attribute(database_id, collection_id, attr[0], 255, required=False, default=default)
             elif attr[1] == "email":
                 default = attr[2] if len(attr) > 2 else None
-                databases.create_email_attribute(database_id, collection_id, attr[0], 255, required=False, default=default)
+                databases.create_email_attribute(database_id, collection_id, attr[0], 255, required=False)
             elif attr[1] == "string20000":
                 default = attr[2] if len(attr) > 2 else None
                 databases.create_string_attribute(database_id, collection_id, attr[0], 20000, required=False, default=default)

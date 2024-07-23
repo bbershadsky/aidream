@@ -63,6 +63,13 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## If having issues on OSX
+
+```zshrc
+pipx install appwrite --include-deps
+pipx install load_dotenv --include-deps
+```
+
 Add the resulting Database and Collection IDs to `.env`
 
 ## Users Table
