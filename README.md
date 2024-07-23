@@ -1,7 +1,3 @@
-<a href="https://github.com/refinedev/refine" target="_blank">
-  <img src="logo.png" />
-</a>
-
 ### Open Source Crowdfunding Platform on the Blockchain
 
 ### [RAIDream Live URL](https://raidream.vercel.app/)
@@ -27,19 +23,6 @@ Also there are region restrictions such as in Mainland China, Iran, Sudan, Cuba,
 ### Stage 3
 
 Launch on Mainnet and start raising funds
-
-## How it works
-
-refine is an open-source React framework for rapidly developing CRUD apps like admin panels, dashboards, and internal tools.
-It can speed up your development time up to 3X without compromising freedom on styling, customization and project workflow.
-
-`<Refine>` is the root component of the app rendered in `App.tsx` . Authentication handles by built-in `AuthProvider` support.
-
-Thanks to `dataProvider` we can easily connect to any API and perform CRUD operations.
-
-`<Refine>` component has a `resources` prop which is an array of objects that define the resources of the app.
-
-[Refer documentation for more information](https://refine.dev/docs/api-reference/core/)
 
 ## Getting Started
 
