@@ -100,6 +100,14 @@ Add the resulting Database and Collection IDs to `.env`
 | currency       | string50    | false    | false |       -       |
 | image          | string255   | false    | false |       -       |
 
+# Getting the GraphQL Schema
+
+```bash
+brew install appwrite
+```
+
+https://dev.to/hackmamba/how-to-create-a-note-taking-app-with-appwrite-and-graphql-in-nextjs-13-gp3
+
 ## Tech Stack
 
 - Frontend: NextJS
