@@ -5,8 +5,9 @@ const APPWRITE_PROJECT = import.meta.env.VITE_APPWRITE_PROJECT_ID;
 const resources = {
   databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
   // bucketId: import.meta.env.VITE_APPWRITE_BUSINESS_BUCKET_ID,
-  users: import.meta.env.VITE_APPWRITE_USER_COLLECTION_ID,
-  projects: import.meta.env.VITE_APPWRITE_COLLECTION_ID,
+  users: import.meta.env.APPWRITE_USERS_COLLECTION_ID,
+  projects: import.meta.env.APPWRITE_PROJECTS_COLLECTION_ID,
+  companies: import.meta.env.VITE_APPWRITE_COMPANIES_COLLECTION_ID,
 } as const;
 const appwriteClient = new Appwrite();
 

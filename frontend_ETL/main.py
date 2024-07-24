@@ -87,6 +87,8 @@ def create_attributes(collection_id):
     # Proposal
     # attributes = [
     #     ("slug", "string"),
+    #     ("businessType", "string"),
+    #     ("country", "string"),
     #     ("author", "string50"),
     #     ("body", "string"),
     #     ("name", "string"),
@@ -141,7 +143,7 @@ def create_attributes(collection_id):
                 databases.create_string_attribute(database_id, collection_id, attr[0], 255, required=False, default=default)
             elif attr[1] == "email":
                 default = attr[2] if len(attr) > 2 else None
-                databases.create_email_attribute(database_id, collection_id, attr[0], 255, required=False)
+                databases.create_email_attribute(database_id, collection_id, attr[0], 255, required=False, default=default)
             elif attr[1] == "string20000":
                 default = attr[2] if len(attr) > 2 else None
                 databases.create_string_attribute(database_id, collection_id, attr[0], 20000, required=False, default=default)

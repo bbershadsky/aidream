@@ -24,6 +24,12 @@ Also there are region restrictions such as in Mainland China, Iran, Sudan, Cuba,
 
 Launch on Mainnet and start raising funds
 
+### Agrivoltaic Farming
+
+https://www.cbc.ca/news/canada/london/solar-panel-crops-agri-voltaics-canada-1.6832870
+
+Solar panels are raised above the ground, crops or grass are grown underneath. This lowers water consumption and increases yield.
+
 ## Getting Started
 
 You can view a live demo over at xxx

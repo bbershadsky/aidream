@@ -1,12 +1,13 @@
 import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
+import { resources } from "../../utility";
 
 export const CompanyCreate = () => {
   const { formProps, saveButtonProps } = useForm();
 
   const { selectProps } = useSelect({
-    resource: "users",
+    resource: resources.users,
     meta: {
       fields: ["name", "id"],
     },
@@ -19,13 +20,13 @@ export const CompanyCreate = () => {
         <Form.Item label="Name" name={["name"]} rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           label="Sales Owner"
           name="salesOwnerId"
           rules={[{ required: true }]}
         >
           <Select {...selectProps} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Business Type" name={["businessType"]}>
           <Select
             options={[
@@ -35,7 +36,7 @@ export const CompanyCreate = () => {
             ]}
           />
         </Form.Item>
-        <Form.Item label="Company Size" name={["companySize"]}>
+        {/* <Form.Item label="Company Size" name={["companySize"]}>
           <Select
             options={[
               { label: "Enterprise", value: "ENTERPRISE" },
@@ -44,7 +45,7 @@ export const CompanyCreate = () => {
               { label: "Small", value: "SMALL" },
             ]}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Country" name={["country"]}>
           <Input />
         </Form.Item>

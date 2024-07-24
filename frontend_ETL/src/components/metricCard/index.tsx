@@ -217,7 +217,7 @@ const getVariantConfig = (variant: MetricType) => {
           />
         </IconWrapper>
       ),
-      title: "Total deals in pipeline",
+      title: "Total proposals in pipeline",
       data: [
         { index: "1", value: 1000 },
         { index: "2", value: 1300 },

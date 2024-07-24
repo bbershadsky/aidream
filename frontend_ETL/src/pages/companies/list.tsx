@@ -68,14 +68,14 @@ export const CompanyList = () => {
           )}
         />
         <Table.Column dataIndex="businessType" title="Type" />
-        <Table.Column dataIndex="companySize" title="Size" />
+        {/* <Table.Column dataIndex="companySize" title="Size" /> */}
         <Table.Column dataIndex="country" title="Country" />
         <Table.Column
           dataIndex={["website"]}
           title="Website"
           render={(value: string) => <UrlField value={value} />}
         />
-        <Table.Column dataIndex={["salesOwner", "name"]} title="Sales Owner" />
+        {/* <Table.Column dataIndex={["salesOwner", "name"]} title="Sales Owner" /> */}
         <Table.Column
           title="Actions"
           dataIndex="actions"

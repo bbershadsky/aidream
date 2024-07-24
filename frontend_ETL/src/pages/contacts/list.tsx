@@ -19,7 +19,7 @@ export const ContactList = () => {
         "id",
         "name",
         "email",
-        { company: ["id", "name"] },
+        { company: ["$id", "name"] },
         "jobTitle",
         "phone",
         "status",
@@ -58,11 +58,12 @@ export const ContactList = () => {
           width={200}
           render={(_, record: { name: string; avatarUrl: string }) => (
             <Space>
-              <Avatar src={record.avatarUrl} alt={record.name} />
+              {/* <Avatar src={record.avatarUrl} alt={record.name} /> */}
               <TextField value={record.name} />
             </Space>
           )}
         />
+        {/* 66a031420005f3d71bd7 */}
         <Table.Column dataIndex={["company", "name"]} title="Company" />
         <Table.Column dataIndex="jobTitle" title="Job Title" />
         <Table.Column

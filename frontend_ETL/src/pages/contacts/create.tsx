@@ -1,22 +1,24 @@
 import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
+import { resources } from "../../utility";
 
 export const ContactCreate = () => {
   const { formProps, saveButtonProps } = useForm();
 
   const { selectProps: companySelectProps } = useSelect({
-    resource: "companies",
+    resource: resources.companies,
     optionLabel: "name",
+
     meta: {
-      fields: ["id", "name"],
+      fields: ["$id", "name"],
     },
   });
 
   const { selectProps: salesOwnerSelectProps } = useSelect({
-    resource: "users",
+    resource: resources.users,
     meta: {
-      fields: ["name", "id"],
+      fields: ["name", "$id"],
     },
     optionLabel: "name",
   });
@@ -37,13 +39,13 @@ export const ContactCreate = () => {
         >
           <Select {...companySelectProps} />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           label="Sales Owner"
           name="salesOwnerId"
           rules={[{ required: true }]}
         >
           <Select {...salesOwnerSelectProps} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Job Title" name={["jobTitle"]}>
           <Input />
         </Form.Item>

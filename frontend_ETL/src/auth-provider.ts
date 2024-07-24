@@ -14,7 +14,7 @@ export const authProvider: AuthProvider = {
       await account.createEmailSession(email, password);
       return {
         success: true,
-        redirectTo: "/users/new",
+        redirectTo: "/proposals",
       };
     } catch (e) {
       const { type, message, code } = e as AppwriteException;

@@ -53,7 +53,6 @@ const ACCESS_TOKEN =
 //     },
 //   }),
 // });
-
 import { Authenticated, Refine } from "@refinedev/core";
 import { dataProvider, liveProvider } from "@refinedev/appwrite";
 import {
@@ -87,9 +86,6 @@ const App: React.FC = () => {
             liveProvider={liveProvider(appwriteClient, {
               databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
             })}
-            // dataProvider={dataProvider(gqlClient)}
-            //             liveProvider={liveProvider(wsClient)}
-            //             notificationProvider={useNotificationProvider}
             authProvider={authProvider}
             routerProvider={routerProvider}
             notificationProvider={useNotificationProvider}
@@ -147,7 +143,6 @@ const App: React.FC = () => {
                 edit: "/contacts/edit/:id",
                 show: "/contacts/show/:id",
                 meta: {
-                  // canDelete: true,
                   label: "Contacts",
                   icon: (
                     <TeamOutlined
@@ -167,65 +162,69 @@ const App: React.FC = () => {
             <Routes>
               <Route
                 element={
-                  <Authenticated
-                    key="authenticated-routes"
-                    fallback={<CatchAllNavigate to="/login" />}
-                  >
-                    <ThemedLayoutV2>
-                      <Outlet />
-                    </ThemedLayoutV2>
-                  </Authenticated>
+                  <ThemedLayoutV2>
+                    <Outlet />
+                  </ThemedLayoutV2>
                 }
               >
                 <Route path="/" element={<Dashboard />} />
 
                 <Route path="/proposals">
                   <Route index element={<CompanyList />} />
-                  <Route path="create" element={<CompanyCreate />} />
+                  <Route
+                    path="create"
+                    element={
+                      <Authenticated
+                        key=""
+                        fallback={<NavigateToResource resource="login" />}
+                      >
+                        <CompanyCreate />
+                      </Authenticated>
+                    }
+                  />
                   <Route path="edit/:id" element={<CompanyEdit />} />
                   <Route path="show/:id" element={<CompanyShow />} />
                 </Route>
 
                 <Route path="/companies">
                   <Route index element={<CompanyList />} />
-                  <Route path="create" element={<CompanyCreate />} />
+                  <Route
+                    path="create"
+                    element={
+                      <Authenticated
+                        key=""
+                        fallback={<NavigateToResource resource="login" />}
+                      >
+                        <CompanyCreate />
+                      </Authenticated>
+                    }
+                  />
                   <Route path="edit/:id" element={<CompanyEdit />} />
                   <Route path="show/:id" element={<CompanyShow />} />
                 </Route>
 
                 <Route path="/contacts">
                   <Route index element={<ContactList />} />
-                  <Route path="create" element={<ContactCreate />} />
+                  <Route
+                    path="create"
+                    element={
+                      <Authenticated
+                        key=""
+                        fallback={<NavigateToResource resource="login" />}
+                      >
+                        <ContactCreate />
+                      </Authenticated>
+                    }
+                  />
                   <Route path="edit/:id" element={<ContactEdit />} />
                   <Route path="show/:id" element={<ContactShow />} />
                 </Route>
-              </Route>
 
-              <Route
-                element={
-                  <Authenticated key="auth-pages" fallback={<Outlet />}>
-                    <NavigateToResource resource="61c43ad33b857" />
-                  </Authenticated>
-                }
-              >
-                <Route path="/login" element={<AuthPage />} />
-                <Route
-                  path="/register"
-                  element={<AuthPage type="register" />}
-                />
-              </Route>
-
-              <Route
-                element={
-                  <Authenticated key="catch-all">
-                    <ThemedLayoutV2>
-                      <Outlet />
-                    </ThemedLayoutV2>
-                  </Authenticated>
-                }
-              >
                 <Route path="*" element={<ErrorComponent />} />
               </Route>
+
+              <Route path="/login" element={<AuthPage />} />
+              <Route path="/register" element={<AuthPage type="register" />} />
             </Routes>
           </Refine>
         </AntdApp>
