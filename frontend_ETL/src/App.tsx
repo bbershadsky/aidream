@@ -73,6 +73,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { appwriteClient } from "./utility";
 import { authProvider } from "./auth-provider";
+import { QuotesEditPage, QuotesListPage, QuotesShowPage } from "./pages/quotes";
 
 const App: React.FC = () => {
   return (
@@ -170,7 +171,7 @@ const App: React.FC = () => {
                 <Route path="/" element={<Dashboard />} />
 
                 <Route path="/proposals">
-                  <Route index element={<CompanyList />} />
+                  <Route index element={<QuotesListPage />} />
                   <Route
                     path="create"
                     element={
@@ -182,8 +183,8 @@ const App: React.FC = () => {
                       </Authenticated>
                     }
                   />
-                  <Route path="edit/:id" element={<CompanyEdit />} />
-                  <Route path="show/:id" element={<CompanyShow />} />
+                  <Route path="edit/:id" element={<QuotesEditPage />} />
+                  <Route path="show/:id" element={<QuotesShowPage />} />
                 </Route>
 
                 <Route path="/companies">
@@ -234,108 +235,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <RefineKbarProvider>
-//         <ColorModeContextProvider>
-//           <Refine
-//             dataProvider={dataProvider(gqlClient)}
-//             liveProvider={liveProvider(wsClient)}
-//             notificationProvider={useNotificationProvider}
-//             routerProvider={routerBindings}
-//             resources={[
-//               {
-//                 name: "dashboard",
-//                 list: "/",
-//                 meta: {
-//                   // @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-//                   icon: <DashboardOutlined />,
-//                 },
-//               },
-//               {
-//                 name: "proposales",
-//                 list: "/proposals",
-//                 create: "/proposals/create",
-//                 edit: "/proposals/edit/:id",
-//                 show: "/proposals/show/:id",
-//                 meta: {
-//                   canDelete: true,
-//                   // @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-//                   icon: <ShopOutlined />,
-//                 },
-//               },
-//               {
-//                 name: "companies",
-//                 list: "/companies",
-//                 create: "/companies/create",
-//                 edit: "/companies/edit/:id",
-//                 show: "/companies/show/:id",
-//                 meta: {
-//                   canDelete: true,
-//                   // @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-//                   icon: <ShopOutlined />,
-//                 },
-//               },
-//               {
-//                 name: "contacts",
-//                 list: "/contacts",
-//                 create: "/contacts/create",
-//                 edit: "/contacts/edit/:id",
-//                 show: "/contacts/show/:id",
-//                 meta: {
-//                   canDelete: true,
-//                   // @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-//                   icon: <TeamOutlined />,
-//                 },
-//               },
-//             ]}
-//             options={{
-//               syncWithLocation: true,
-//               warnWhenUnsavedChanges: true,
-//               liveMode: "auto",
-//             }}
-//           >
-//             <Routes>
-//               <Route
-//                 element={
-//                   <ThemedLayoutV2>
-//                     <Outlet />
-//                   </ThemedLayoutV2>
-//                 }
-//               >
-//                 <Route path="/">
-//                   <Route index element={<Dashboard />} />
-//                 </Route>
-
-//                 <Route path="/proposals">
-//                   <Route index element={<CompanyList />} />
-//                   <Route path="create" element={<CompanyCreate />} />
-//                   <Route path="edit/:id" element={<CompanyEdit />} />
-//                   <Route path="show/:id" element={<CompanyShow />} />
-//                 </Route>
-//                 <Route path="/companies">
-//                   <Route index element={<CompanyList />} />
-//                   <Route path="create" element={<CompanyCreate />} />
-//                   <Route path="edit/:id" element={<CompanyEdit />} />
-//                   <Route path="show/:id" element={<CompanyShow />} />
-//                 </Route>
-
-//                 <Route path="/contacts">
-//                   <Route index element={<ContactList />} />
-//                   <Route path="create" element={<ContactCreate />} />
-//                   <Route path="edit/:id" element={<ContactEdit />} />
-//                   <Route path="show/:id" element={<ContactShow />} />
-//                 </Route>
-//               </Route>
-//             </Routes>
-//             <RefineKbar />
-//             <UnsavedChangesNotifier />
-//             <DocumentTitleHandler />
-//           </Refine>
-//         </ColorModeContextProvider>
-//       </RefineKbarProvider>
-//     </BrowserRouter>
-//   );
-// }
