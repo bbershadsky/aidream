@@ -32,7 +32,7 @@ export const CompanyQuotesTable: FC<Props> = ({ style }) => {
   const params = useParams();
 
   const { tableProps, filters, setFilters } = useTable<Quote>({
-    resource: "quotes",
+    resource: resources.projects,
     syncWithLocation: false,
     sorters: {
       initial: [

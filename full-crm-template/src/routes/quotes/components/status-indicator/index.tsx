@@ -20,7 +20,7 @@ export const StatusIndicator: FC<Props> = ({ id, status, style }) => {
 
   const onStatusChange = (newStatus: Quote["status"]) => {
     mutate({
-      resource: "quotes",
+      resource: resources.projects,
       id,
       values: {
         status: newStatus,

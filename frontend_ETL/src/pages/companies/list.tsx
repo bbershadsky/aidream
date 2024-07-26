@@ -67,6 +67,20 @@ export const CompanyList = () => {
             </Space>
           )}
         />
+        <Table.Column
+          title="Title"
+          render={(_, record: { title: string; avatarUrl: string }) => (
+            <Space>
+              <Avatar
+                src={record.avatarUrl}
+                size="large"
+                shape="square"
+                alt={record.title}
+              />
+              <TextField value={record.title} />
+            </Space>
+          )}
+        />
         <Table.Column dataIndex="businessType" title="Type" />
         {/* <Table.Column dataIndex="companySize" title="Size" /> */}
         <Table.Column dataIndex="country" title="Country" />

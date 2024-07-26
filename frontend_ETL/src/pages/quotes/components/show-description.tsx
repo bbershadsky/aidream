@@ -6,10 +6,12 @@ import type { HttpError } from "@refinedev/core";
 
 import { Form, Spin } from "antd";
 
-import type { Quote, QuoteUpdateInput } from "../../../graphql/schema.types";
+// import type { Quote, QuoteUpdateInput } from "../../../graphql/schema.types";
 // import type { Quote, QuoteUpdateInput } from "@/graphql/schema.types";
 
-import { QUOTES_UPDATE_QUOTE_MUTATION } from "../queries";
+// import { QUOTES_UPDATE_QUOTE_MUTATION } from "../queries";
+import { resources } from "../../../utility";
+import { Proposal, ProposalUpdateInput } from "../../../types/types";
 
 const MDEditor = lazy(() => import("@uiw/react-md-editor"));
 
@@ -17,11 +19,11 @@ export const ShowDescription = () => {
   const params = useParams<{ id: string }>();
 
   const { formProps, queryResult, autoSaveProps } = useForm<
-    Quote,
+    Proposal,
     HttpError,
-    QuoteUpdateInput
+    ProposalUpdateInput
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     redirect: false,
@@ -31,9 +33,9 @@ export const ShowDescription = () => {
       enabled: true,
     },
     invalidates: [],
-    meta: {
-      gqlMutation: QUOTES_UPDATE_QUOTE_MUTATION,
-    },
+    // meta: {
+    //   gqlMutation: QUOTES_UPDATE_QUOTE_MUTATION,
+    // },
   });
 
   const formLoading = queryResult?.isLoading ?? false;

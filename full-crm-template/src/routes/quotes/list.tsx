@@ -55,7 +55,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
 
   const { tableProps, searchFormProps, filters, sorters, tableQueryResult } =
     useTable<Quote, HttpError, { title: string }>({
-      resource: "quotes",
+      resource: resources.projects,
       onSearch: (values) => {
         return [
           {

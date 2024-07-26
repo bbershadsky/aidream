@@ -48,6 +48,12 @@ interface Proposal {
   email: string;
   title: string;
 }
+
+type Quote1 = {
+  id: string;
+  // Add other properties of Quote here
+};
+
 const statusOptions: { label: string; value: QuoteStatus }[] = [
   {
     label: "Draft",
@@ -120,7 +126,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
     <div className="page-container">
       <List
         breadcrumb={false}
-        headerButtons={() => {
+        headerButtons={({ defaultButtons }) => {
           return (
             <Space
               style={{
@@ -150,6 +156,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
                   />
                 </Form.Item>
               </Form>
+              {defaultButtons}
             </Space>
           );
         }}
@@ -158,7 +165,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
             marginTop: "28px",
           },
         }}
-        title={<ListTitleButton buttonText="Add proposal" toPath="quotes" />}
+        // title={<ListTitleButton buttonText="Add proposal" toPath="/create" />}
       >
         <Table
           {...tableProps}
@@ -171,7 +178,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
           rowKey="<id"
         >
           <Table.Column
-            dataIndex="title"
+            dataIndex="name"
             title="Title"
             // defaultFilteredValue={getDefaultFilter("title", filters)}
             // filterDropdown={(props) => (
@@ -274,7 +281,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
               return <Text>{dayjs(value).fromNow()}</Text>;
             }}
           /> */}
-          {/* <Table.Column<Quote>
+          <Table.Column<Quote1>
             fixed="right"
             title="Actions"
             dataIndex="actions"
@@ -308,7 +315,7 @@ export const QuotesListPage: FC<PropsWithChildren> = ({ children }) => {
                 </Space>
               );
             }}
-          /> */}
+          />
         </Table>
       </List>
       {children}

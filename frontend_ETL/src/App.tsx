@@ -73,7 +73,12 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { appwriteClient } from "./utility";
 import { authProvider } from "./auth-provider";
-import { QuotesEditPage, QuotesListPage, QuotesShowPage } from "./pages/quotes";
+import {
+  QuotesCreate,
+  QuotesEditPage,
+  QuotesListPage,
+  QuotesShowPage,
+} from "./pages/quotes";
 
 const App: React.FC = () => {
   return (
@@ -179,7 +184,7 @@ const App: React.FC = () => {
                         key=""
                         fallback={<NavigateToResource resource="login" />}
                       >
-                        <CompanyCreate />
+                        <QuotesCreate />
                       </Authenticated>
                     }
                   />

@@ -34,6 +34,7 @@ import { currencyNumber } from "../utilities";
 // import { currencyNumber } from "@/utilities";
 
 import { QUOTES_UPDATE_QUOTE_MUTATION } from "../pages/quotes/queries";
+import { resources } from "../utility";
 
 const columns = [
   {
@@ -128,7 +129,7 @@ export const ProductsServices = () => {
     HttpError,
     GetVariables<QuotesUpdateQuoteMutationVariables>
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     liveMode: "off",
@@ -427,7 +428,7 @@ const TaxForm = (props: {
     HttpError,
     QuoteUpdateInput
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     redirect: false,

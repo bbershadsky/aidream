@@ -26,7 +26,7 @@ export const QuotesShowPage = () => {
   const params = useParams<{ id: string }>();
 
   const { data, isLoading } = useOne<Quote>({
-    resource: "quotes",
+    resource: resources.projects,
     id: params.id,
     liveMode: "off",
     meta: {

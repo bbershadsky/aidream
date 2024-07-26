@@ -48,7 +48,7 @@ export const QuotesFormModal: FC<Props> = ({
     HttpError,
     GetVariables<QuotesCreateQuoteMutationVariables>
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action,
     id: params.id,
     defaultVisible: true,

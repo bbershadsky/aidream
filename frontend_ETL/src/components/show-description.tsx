@@ -10,6 +10,7 @@ import type { Quote, QuoteUpdateInput } from "../graphql/schema.types";
 // import type { Quote, QuoteUpdateInput } from "@/graphql/schema.types";
 
 import { QUOTES_UPDATE_QUOTE_MUTATION } from "../pages/quotes/queries";
+import { resources } from "../utility";
 
 const MDEditor = lazy(() => import("@uiw/react-md-editor"));
 
@@ -21,7 +22,7 @@ export const ShowDescription = () => {
     HttpError,
     QuoteUpdateInput
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     redirect: false,

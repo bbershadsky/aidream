@@ -28,7 +28,7 @@ const PdfExport = () => {
   const { data, isLoading, isFetching, refetch } = useOne<
     GetFields<QuotesGetQuoteQuery>
   >({
-    resource: "quotes",
+    resource: resources.projects,
     id: params.id,
     liveMode: "off",
     meta: {

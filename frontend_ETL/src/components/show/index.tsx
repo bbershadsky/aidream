@@ -6,10 +6,8 @@ import { useModal, useOne } from "@refinedev/core";
 import { EditOutlined, LeftOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
 
-// import { CustomAvatar, FullScreenLoading, Text } from "@/components";
-// import type { Quote } from "@/graphql/schema.types";
-import { CustomAvatar, FullScreenLoading, Text } from "../../../components";
-// import type { Quote } from "../../../graphql/schema.types";
+import { CustomAvatar, FullScreenLoading, Text } from "../../components";
+import type { Quote } from "../../graphql/schema.types";
 
 import {
   ProductsServices,
@@ -17,47 +15,45 @@ import {
   ShowDescription,
   StatusIndicator,
 } from "../components";
-import { QUOTES_GET_QUOTE_QUERY } from "../queries";
+import { QUOTES_GET_QUOTE_QUERY } from "../../pages/quotes/queries";
+// import { CustomAvatar, FullScreenLoading, Text } from "@/components";
+// import type { Quote } from "@/graphql/schema.types";
+
+// import {
+//   ProductsServices,
+//   QuotesFormModal,
+//   ShowDescription,
+//   StatusIndicator,
+// } from "../components";
+// import { QUOTES_GET_QUOTE_QUERY } from "../queries";
 import styles from "./index.module.css";
-import { resources } from "../../../utility";
 
-const PdfExport = lazy(() => import("../components/pdf-export"));
-
-interface Proposal {
-  $id: string;
-  username: string;
-  email: string;
-  title: string;
-  status: string;
-  description: string;
-  language: string;
-  companyId: string;
-}
+const PdfExport = lazy(() => import("../pdf-export"));
 
 export const QuotesShowPage = () => {
   const { visible, show, close } = useModal();
 
   const params = useParams<{ id: string }>();
 
-  const { data, isLoading } = useOne<Proposal>({
-    resource: resources.projects,
+  const { data, isLoading } = useOne<Quote>({
+    resource: "quotes",
     id: params.id,
     liveMode: "off",
-    // meta: {
-    //   gqlQuery: QUOTES_GET_QUOTE_QUERY,
-    // },
+    meta: {
+      gqlQuery: QUOTES_GET_QUOTE_QUERY,
+    },
   });
 
   if (isLoading || !data?.data) {
     return <FullScreenLoading />;
   }
 
-  const { title, status, companyId, $id } = data?.data ?? {};
+  const { title, id, status, company, contact, salesOwner } = data?.data ?? {};
 
   return (
     <>
       <div className={styles.container}>
-        <Link to="/proposals">
+        <Link to="/quotes">
           {/* @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66 */}
           <Button icon={<LeftOutlined />}>Quotes</Button>
         </Link>
@@ -81,15 +77,15 @@ export const QuotesShowPage = () => {
             </Button>
           </Space>
         </div>
-        {/* <StatusIndicator
+        <StatusIndicator
           style={{
             marginTop: "32px",
           }}
-          id={$id}
+          id={id}
           status={status}
-        /> */}
+        />
         <div className={styles.pdf}>
-          {/*   <div className={styles.pdfQuoteInfo}>
+          <div className={styles.pdfQuoteInfo}>
             <CustomAvatar
               name={company?.name}
               src={company?.avatarUrl}
@@ -115,10 +111,10 @@ export const QuotesShowPage = () => {
                 <Text strong>Prepared for:</Text>
                 <Text>{contact.name}</Text>
               </div>
-            </div>*/}
-          {/* </div>  */}
-          {/* <div className={styles.divider} /> */}
-          {/* <ProductsServices /> */}
+            </div>
+          </div>
+          <div className={styles.divider} />
+          <ProductsServices />
           <div className={styles.divider} />
           <ShowDescription />
         </div>

@@ -20,7 +20,7 @@ export const ShowDescription = () => {
     HttpError,
     QuoteUpdateInput
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     redirect: false,

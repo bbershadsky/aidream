@@ -1,92 +1,119 @@
-import type { FC, PropsWithChildren } from "react";
+import React from "react";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { resources } from "../../utility";
+import MDEditor from "@uiw/react-md-editor";
+import { Form, AutoComplete, Input, Select } from "antd";
+export const QuotesCreate = () => {
+  const { formProps, saveButtonProps } = useForm();
 
-// import { QuotesFormModal } from "./components";
-import { Modal, Spin, Form, Input, Select, Button } from "antd";
-import { replace } from "lodash";
+  const { selectProps: companySelectProps } = useSelect({
+    resource: resources.companies,
+    optionLabel: "name",
 
-export const QuotesCreatePage: FC<PropsWithChildren> = ({ children }) => {
-  const loading = false;
+    meta: {
+      fields: ["$id", "name"],
+    },
+  });
+
+  const { selectProps: salesOwnerSelectProps } = useSelect({
+    resource: resources.users,
+    meta: {
+      fields: ["name", "$id"],
+    },
+    optionLabel: "name",
+  });
+
+  const categories = [
+    { label: "Art", value: "Art" },
+    { label: "Comics", value: "Comics" },
+    { label: "Crafts", value: "Crafts" },
+    { label: "Dance", value: "Dance" },
+    { label: "Design", value: "Design" },
+    { label: "Fashion", value: "Fashion" },
+    { label: "Film & Video", value: "Film & Video" },
+    { label: "Food", value: "Food" },
+    { label: "Games", value: "Games" },
+    { label: "Journalism", value: "Journalism" },
+    { label: "Music", value: "Music" },
+    { label: "Photography", value: "Photography" },
+    { label: "Publishing", value: "Publishing" },
+    { label: "Technology", value: "Technology" },
+    { label: "Theater", value: "Theater" },
+  ];
+
+  const countries = [
+    { label: "Canada", value: "Canada" },
+    { label: "United States", value: "United States" },
+    { label: "Mexico", value: "Mexico" },
+    { label: "United Kingdom", value: "United Kingdom" },
+    { label: "France", value: "France" },
+    { label: "Germany", value: "Germany" },
+    { label: "Italy", value: "Italy" },
+    { label: "Spain", value: "Spain" },
+    { label: "Australia", value: "Australia" },
+    { label: "Japan", value: "Japan" },
+    { label: "China", value: "China" },
+    { label: "India", value: "India" },
+    { label: "Brazil", value: "Brazil" },
+    { label: "Russia", value: "Russia" },
+    { label: "South Africa", value: "South Africa" },
+  ];
+
   return (
-    <>
-      <Modal
-        // {...modalProps}
-        // confirmLoading={loading}
-        width={560}
-        // style={{ display: isHaveOverModal ? "none" : "inherit" }}
-        // onCancel={() => {
-        //   if (onCancel) {
-        //     onCancel();
-        //     return;
-        //   }
-        //   //TODO: modalProps.onCancel expect an event so, I used close. Actually both of them are same.
-        //   close();
-        //   list("quotes", "replace");
-        // }}
-      >
-        <Spin spinning={loading}>
-          <Form
-            // {...formProps}
-            layout="vertical"
-          >
-            <Form.Item
-              rules={[{ required: true }]}
-              name="title"
-              label="Quotes title"
-            >
-              <Input placeholder="Please enter quote title" />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true }]}
-              name={["salesOwnerId"]}
-              // initialValue={formProps?.initialValues?.salesOwner?.id}
-              label="Sales owner"
-            >
-              <Select
-                // {...selectPropsSalesOwners}
-                placeholder="Please select user"
-              />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true }]}
-              name={["companyId"]}
-              // initialValue={
-              //   searchParams.get("companyId") ??
-              //   formProps?.initialValues?.company?.id
-              // }
-              label="Company"
-              extra={
-                <Button
-                  style={{ paddingLeft: 0 }}
-                  type="link"
-                  // @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66
-                  icon={<PlusCircleOutlined />}
-                  // onClick={() => replace(`company-create?to=${pathname}`)}
-                >
-                  Add new company
-                </Button>
-              }
-            >
-              <Select
-                // {...selectPropsCompanies}
-                placeholder="Please select company"
-              />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true }]}
-              name={["contactId"]}
-              // initialValue={formProps?.initialValues?.contact?.id}
-              label="Quote Contact"
-            >
-              <Select
-                // {...selectPropsContacts}
-                placeholder="Please select contact"
-              />
-            </Form.Item>
-          </Form>
-        </Spin>
-      </Modal>
-      {/* <QuotesFormModal action="create" /> */}
-      {children}
-    </>
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        <Form.Item label="Name" name={["name"]} rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Company"
+          name={["companyId"]}
+          rules={[{ required: true }]}
+        >
+          <Select {...companySelectProps} />
+        </Form.Item>
+
+        <Form.Item label="Category" name="category">
+          <Select options={categories} placeholder="Select" />
+        </Form.Item>
+
+        <Form.Item label="Country" name="country">
+          <AutoComplete
+            options={countries}
+            placeholder="Select"
+            filterOption={(inputValue, option) =>
+              option
+                ? option.value.toLowerCase().includes(inputValue.toLowerCase())
+                : false
+            }
+          />
+        </Form.Item>
+
+        <Form.Item label="Description" name="description">
+          <MDEditor preview="edit" data-color-mode="light" height={250} />
+        </Form.Item>
+
+        {/* <Form.Item
+          label="Sales Owner"
+          name="salesOwnerId"
+          rules={[{ required: true }]}
+        >
+          <Select {...salesOwnerSelectProps} />
+        </Form.Item> */}
+
+        <Form.Item label="Status" name={["status"]}>
+          <Select
+            options={[
+              { label: "NEW", value: "NEW" },
+              { label: "PLANNING", value: "PLANNING" },
+              { label: "CAMPAIGNING", value: "CAMPAIGNING" },
+              { label: "FUNDS RAISED", value: "FUNDS RAISED" },
+              { label: "STARTED BUILDING", value: "STARTED BUILDING" },
+              { label: "COMPLETE", value: "COMPLETE" },
+            ]}
+          />
+        </Form.Item>
+      </Form>
+    </Create>
   );
 };

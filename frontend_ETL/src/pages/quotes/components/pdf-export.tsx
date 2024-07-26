@@ -20,6 +20,7 @@ import type { QuotesGetQuoteQuery } from "../../../graphql/types";
 import { currencyNumber } from "../../../utilities";
 
 import { QUOTES_GET_QUOTE_QUERY } from "../queries";
+import { resources } from "../../../utility";
 
 const PdfExport = () => {
   const { modalProps, show } = useModal();
@@ -28,7 +29,7 @@ const PdfExport = () => {
   const { data, isLoading, isFetching, refetch } = useOne<
     GetFields<QuotesGetQuoteQuery>
   >({
-    resource: "quotes",
+    resource: resources.projects,
     id: params.id,
     liveMode: "off",
     meta: {

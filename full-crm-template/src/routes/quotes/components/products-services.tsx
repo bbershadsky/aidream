@@ -121,7 +121,7 @@ export const ProductsServices = () => {
     HttpError,
     GetVariables<QuotesUpdateQuoteMutationVariables>
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     liveMode: "off",
@@ -420,7 +420,7 @@ const TaxForm = (props: {
     HttpError,
     QuoteUpdateInput
   >({
-    resource: "quotes",
+    resource: resources.projects,
     action: "edit",
     id: params.id,
     redirect: false,

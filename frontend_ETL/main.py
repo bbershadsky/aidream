@@ -88,8 +88,11 @@ def create_attributes(collection_id):
     # attributes = [
     #     ("slug", "string"),
     #     ("businessType", "string"),
+    #     ("companyId", "string"),
     #     ("country", "string"),
+    #     ("category", "string"),
     #     ("author", "string50"),
+    #     ("status", "string50"),
     #     ("body", "string"),
     #     ("name", "string"),
     #     ("title", "string"),
