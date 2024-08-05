@@ -25,6 +25,7 @@ import {
   QUOTES_UPDATE_QUOTE_MUTATION,
 } from "../../queries";
 import { resources } from "../../../../utility";
+import { categories, currencyOptions } from "../../../../constants/forms";
 
 type Props = {
   action: "create" | "edit";
@@ -106,11 +107,11 @@ export const QuotesFormModal: FC<Props> = ({
           <Form.Item
             rules={[{ required: true }]}
             name="title"
-            label="Quotes title"
+            label="Proposal title"
           >
             <Input placeholder="Please enter quote title" />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             rules={[{ required: true }]}
             name={["salesOwnerId"]}
             initialValue={formProps?.initialValues?.salesOwner?.id}
@@ -120,7 +121,7 @@ export const QuotesFormModal: FC<Props> = ({
               {...selectPropsSalesOwners}
               placeholder="Please select user"
             />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             rules={[{ required: true }]}
             name={["companyId"]}
@@ -146,17 +147,26 @@ export const QuotesFormModal: FC<Props> = ({
               placeholder="Please select company"
             />
           </Form.Item>
-          <Form.Item
+
+          <Form.Item label="Category" name="category">
+            <Select options={categories} placeholder="Select" />
+          </Form.Item>
+
+          <Form.Item label="Currency" name="currency">
+            <Select options={currencyOptions} placeholder="Select" />
+          </Form.Item>
+
+          {/* <Form.Item
             rules={[{ required: true }]}
             name={["contactId"]}
             initialValue={formProps?.initialValues?.contact?.id}
-            label="Quote Contact"
+            label="Proposal Contact"
           >
             <Select
               {...selectPropsContacts}
               placeholder="Please select contact"
             />
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </Spin>
     </Modal>

@@ -15,9 +15,10 @@ export const Dashboard = () => {
       <Col xs={24} sm={24} xl={8}>
         <MetricCard variant="669e459d001d91a860c3" />
       </Col>
-      {/* <Col span={24}>
-        <DealChart />
-      </Col> */}
+      <Col span={24}>
+        <h1>Trending Projects</h1>
+        {/* <DealChart /> */}
+      </Col>
     </Row>
   );
 };

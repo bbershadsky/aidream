@@ -45,3 +45,9 @@ export type ProposalUpdateInput = {
   //   tax?: InputMaybe<Scalars["Int"]["input"]>;
   title?: InputMaybe<Scalars["String"]["input"]>;
 };
+
+export interface CurrencyOption {
+  value: string;
+  label: string;
+  symbol: string;
+}

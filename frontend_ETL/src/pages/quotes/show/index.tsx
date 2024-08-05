@@ -30,9 +30,20 @@ interface Proposal {
   title: string;
   status: string;
   description: string;
+  currency: string;
   language: string;
   companyId: string;
 }
+
+import PaymentCard from "../components/PaymentCard";
+const sampleCryptos = [
+  { name: "Bitcoin", symbol: "BTC" },
+  { name: "Ethereum", symbol: "ETH" },
+  { name: "Tether", symbol: "USDT" },
+  { name: "Binance Coin", symbol: "BNB" },
+  { name: "Ripple", symbol: "XRP" },
+];
+interface Props {}
 
 export const QuotesShowPage = () => {
   const { visible, show, close } = useModal();
@@ -42,7 +53,7 @@ export const QuotesShowPage = () => {
   const { data, isLoading } = useOne<Proposal>({
     resource: resources.projects,
     id: params.id,
-    liveMode: "off",
+    liveMode: "auto",
     // meta: {
     //   gqlQuery: QUOTES_GET_QUOTE_QUERY,
     // },
@@ -52,14 +63,15 @@ export const QuotesShowPage = () => {
     return <FullScreenLoading />;
   }
 
-  const { title, status, companyId, $id } = data?.data ?? {};
+  const { title, currency, language, description, status, companyId, $id } =
+    data?.data ?? {};
 
   return (
     <>
       <div className={styles.container}>
         <Link to="/proposals">
           {/* @ts-expect-error Ant Design Icon's v5.0.1 has an issue with @types/react@^18.2.66 */}
-          <Button icon={<LeftOutlined />}>Quotes</Button>
+          <Button icon={<LeftOutlined />}>Proposals</Button>
         </Link>
         <div className={styles.divider} />
         <div className={styles.title}>
@@ -89,6 +101,8 @@ export const QuotesShowPage = () => {
           status={status}
         /> */}
         <div className={styles.pdf}>
+          <p>{language}</p>
+          <p>{currency}</p>
           {/*   <div className={styles.pdfQuoteInfo}>
             <CustomAvatar
               name={company?.name}
@@ -119,8 +133,23 @@ export const QuotesShowPage = () => {
           {/* </div>  */}
           {/* <div className={styles.divider} /> */}
           {/* <ProductsServices /> */}
+          <p>{description}</p>
           <div className={styles.divider} />
-          <ShowDescription />
+
+          {/* <ShowDescription /> */}
+          <h1> Support this Project </h1>
+          <div>
+            {sampleCryptos.map((crypto, index) => (
+              <PaymentCard
+                key={index}
+                address={`1 ${crypto.symbol} ${crypto.name}`}
+                paymentType=""
+                // notes={`Transaction fee: 0.5%`}
+              />
+            ))}
+          </div>
+
+          <h1>Discussion</h1>
         </div>
       </div>
       {visible && (

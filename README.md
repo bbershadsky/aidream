@@ -96,22 +96,44 @@ Add the resulting Database and Collection IDs to `.env`
 | address                | string255 | false    | false |       -       |
 | preferredPaymentMethod | string255 | false    | false |       -       |
 
-## Projects (Article) Table
+## Projects (Proposals) Table
 
 | column name    | type        | required | array | default value |
 | -------------- | ----------- | -------- | ----- | :-----------: |
+| name           | string255   | false    | false |       -       |
+| company        |
+| category       |
+| currency       | string50    | false    | false |       -       |
+| description    | string10000 | false    | false |       -       |
+| status         |
+| goal           |
 | slug           | string255   | false    | false |       -       |
 | author         | string50    | true     | false |       -       |
-| name           | string255   | false    | false |       -       |
 | title          | string255   | false    | false |       -       |
 | body           | string10000 | false    | false |       -       |
-| description    | string10000 | false    | false |       -       |
 | favorited      | boolean     | false    | false |       -       |
 | favoritesCount | integer     | false    | false |       0       |
 | tagList        | string50    | false    | true  |       0       |
 | language       | string50    | false    | false |       -       |
-| currency       | string50    | false    | false |       -       |
 | image          | string255   | false    | false |       -       |
+
+## Goal
+
+| column name | type       | required | array | default value |
+| ----------- | ---------- | -------- | ----- | :-----------: |
+| title       | string255  | true     | false |       -       |
+| description | string1000 | false    | false |       -       |
+| amountUSD   | number     | false    | false |       0       |
+| deadline    | timestamp  | false    | false |       0       |
+
+## Comments Table
+
+| column name | type      | required | array | default value |
+| ----------- | --------- | -------- | ----- | :-----------: |
+| text        | string255 | true     | false |       -       |
+| author      | string255 | true     | false |       -       |
+| votesUP     | number    | false    | false |       0       |
+| votesDN     | number    | false    | false |       0       |
 
 # Getting the GraphQL Schema
 
@@ -120,6 +142,18 @@ brew install appwrite
 ```
 
 https://dev.to/hackmamba/how-to-create-a-note-taking-app-with-appwrite-and-graphql-in-nextjs-13-gp3
+
+## Ollama A.I generation
+
+https://github.com/ollama/ollama/blob/main/docs/api.md
+
+```
+curl http://gersu.com:11434/api/generate -d '{
+  "model": "qwen2:0.5b",
+  "prompt": "Generate a project plan for an agrivoltaic farming project"
+  "stream": false,
+}'
+```
 
 ## Tech Stack
 

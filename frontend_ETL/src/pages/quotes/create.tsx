@@ -3,6 +3,7 @@ import { Create, useForm, useSelect } from "@refinedev/antd";
 import { resources } from "../../utility";
 import MDEditor from "@uiw/react-md-editor";
 import { Form, AutoComplete, Input, Select } from "antd";
+import { categories } from "../../constants/forms";
 export const QuotesCreate = () => {
   const { formProps, saveButtonProps } = useForm();
 
@@ -22,24 +23,6 @@ export const QuotesCreate = () => {
     },
     optionLabel: "name",
   });
-
-  const categories = [
-    { label: "Art", value: "Art" },
-    { label: "Comics", value: "Comics" },
-    { label: "Crafts", value: "Crafts" },
-    { label: "Dance", value: "Dance" },
-    { label: "Design", value: "Design" },
-    { label: "Fashion", value: "Fashion" },
-    { label: "Film & Video", value: "Film & Video" },
-    { label: "Food", value: "Food" },
-    { label: "Games", value: "Games" },
-    { label: "Journalism", value: "Journalism" },
-    { label: "Music", value: "Music" },
-    { label: "Photography", value: "Photography" },
-    { label: "Publishing", value: "Publishing" },
-    { label: "Technology", value: "Technology" },
-    { label: "Theater", value: "Theater" },
-  ];
 
   const countries = [
     { label: "Canada", value: "Canada" },
