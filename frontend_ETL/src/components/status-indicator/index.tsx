@@ -8,6 +8,7 @@ import type { Quote, QuoteUpdateInput } from "../../graphql/schema.types";
 
 import { QUOTES_UPDATE_QUOTE_MUTATION } from "../../pages/quotes/queries";
 import styles from "./index.module.css";
+import { resources } from "../../utility";
 
 interface Props {
   id: string;

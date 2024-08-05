@@ -4,25 +4,63 @@ import { Row, Col, Input, Button, Typography, Spin } from "antd";
 
 const { TextArea } = Input;
 const { Title, Paragraph } = Typography;
-
+import styles from "./index.module.css";
 export const AiGen = () => {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+
   const handleGenerate = async () => {
-    setLoading(true); // Start the spinner
+    setLoading(true);
+    setResponse(""); // Reset the response before starting
+
     try {
-      const res = await axios.post("http://gersu.com:11434/api/generate", {
-        model: "qwen2:0.5b",
-        prompt,
-        stream: false,
+      const res = await fetch("http://gersu.com:11434/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "qwen2:0.5b",
+          prompt,
+          stream: true,
+        }),
       });
-      setResponse(res.data.response); // Assuming the response is in res.data
+
+      if (!res.body) {
+        throw new Error("No response body");
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let done = false;
+
+      while (!done) {
+        const { value, done: isDone } = await reader.read();
+        done = isDone;
+        const chunk = decoder.decode(value, { stream: true });
+
+        // Split the stream data by newline and parse each line as JSON
+        chunk.split("\n").forEach((line) => {
+          if (line.trim()) {
+            // Ignore empty lines
+            try {
+              const data = JSON.parse(line);
+              if (data.response) {
+                setResponse((prev) => prev + data.response);
+              }
+            } catch (error) {
+              console.error("Error parsing JSON:", error);
+            }
+          }
+        });
+      }
     } catch (error) {
       console.error("Error generating response:", error);
       setResponse("An error occurred while generating the response.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false); // Stop the spinner
   };
 
   return (
@@ -40,12 +78,12 @@ export const AiGen = () => {
           type="primary"
           onClick={handleGenerate}
           style={{ marginTop: "16px" }}
-          disabled={loading} // Disable the button when loading
+          disabled={loading}
         >
           {loading ? <Spin /> : "Generate"}
         </Button>
         <div style={{ marginTop: "24px" }}>
-          <Title level={3}>Response:</Title>
+          <div className={styles.divider} />
           <Paragraph style={{ whiteSpace: "pre-wrap" }}>{response}</Paragraph>
         </div>
       </Col>
