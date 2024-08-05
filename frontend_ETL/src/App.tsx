@@ -79,6 +79,7 @@ import {
   QuotesListPage,
   QuotesShowPage,
 } from "./pages/quotes";
+import { AiGen } from "./pages/aigen";
 
 const App: React.FC = () => {
   return (
@@ -99,6 +100,18 @@ const App: React.FC = () => {
               {
                 name: "dashboard",
                 list: "/",
+                meta: {
+                  icon: (
+                    <DashboardOutlined
+                      onPointerEnterCapture={undefined}
+                      onPointerLeaveCapture={undefined}
+                    />
+                  ),
+                },
+              },
+              {
+                name: "A.I Generator",
+                list: "/aigen",
                 meta: {
                   icon: (
                     <DashboardOutlined
@@ -174,6 +187,7 @@ const App: React.FC = () => {
                 }
               >
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/aigen" element={<AiGen />} />
 
                 <Route path="/proposals">
                   <Route index element={<QuotesListPage />} />

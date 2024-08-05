@@ -20,13 +20,6 @@ export const CompanyCreate = () => {
         <Form.Item label="Name" name={["name"]} rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        {/* <Form.Item
-          label="Sales Owner"
-          name="salesOwnerId"
-          rules={[{ required: true }]}
-        >
-          <Select {...selectProps} />
-        </Form.Item> */}
         <Form.Item label="Business Type" name={["businessType"]}>
           <Select
             options={[
