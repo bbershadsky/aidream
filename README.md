@@ -104,7 +104,7 @@ Add the resulting Database and Collection IDs to `.env`
 | company        |
 | category       |
 | currency       | string50    | false    | false |       -       |
-| description    | string10000 | false    | false |       -       |
+| description2   | string10000 | false    | false |       -       |
 | status         |
 | goal           |
 | slug           | string255   | false    | false |       -       |
@@ -119,12 +119,12 @@ Add the resulting Database and Collection IDs to `.env`
 
 ## Goal
 
-| column name | type       | required | array | default value |
-| ----------- | ---------- | -------- | ----- | :-----------: |
-| title       | string255  | true     | false |       -       |
-| description | string1000 | false    | false |       -       |
-| amountUSD   | number     | false    | false |       0       |
-| deadline    | timestamp  | false    | false |       0       |
+| column name     | type       | required | array | default value |
+| --------------- | ---------- | -------- | ----- | :-----------: |
+| title           | string255  | true     | false |       -       |
+| description     | string1000 | false    | false |       -       |
+| targetAmountUSD | number     | false    | false |       0       |
+| deadline        | timestamp  | false    | false |       0       |
 
 ## Comments Table
 
@@ -142,18 +142,6 @@ brew install appwrite
 ```
 
 https://dev.to/hackmamba/how-to-create-a-note-taking-app-with-appwrite-and-graphql-in-nextjs-13-gp3
-
-## Ollama A.I generation
-
-https://github.com/ollama/ollama/blob/main/docs/api.md
-
-```
-curl http://gersu.com:11434/api/generate -d '{
-  "model": "qwen2:0.5b",
-  "prompt": "Generate a project plan for an agrivoltaic farming project"
-  "stream": false,
-}'
-```
 
 ## Tech Stack
 
@@ -173,3 +161,7 @@ Appwrite provided the perfect backend tech stack, offering user-friendly authent
 - GET and display paginated lists of articles
 - Favorite articles
 - Follow other users
+
+## Ideas
+
+crowdfunding gym

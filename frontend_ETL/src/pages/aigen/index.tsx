@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { Row, Col, Input, Button, Typography, Spin } from "antd";
 
 const { TextArea } = Input;

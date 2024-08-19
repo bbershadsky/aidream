@@ -30,6 +30,7 @@ interface Proposal {
   title: string;
   status: string;
   description: string;
+  description2: string;
   currency: string;
   language: string;
   companyId: string;
@@ -63,8 +64,16 @@ export const QuotesShowPage = () => {
     return <FullScreenLoading />;
   }
 
-  const { title, currency, language, description, status, companyId, $id } =
-    data?.data ?? {};
+  const {
+    title,
+    currency,
+    language,
+    description,
+    description2,
+    status,
+    companyId,
+    $id,
+  } = data?.data ?? {};
 
   return (
     <>
@@ -134,6 +143,7 @@ export const QuotesShowPage = () => {
           {/* <div className={styles.divider} /> */}
           {/* <ProductsServices /> */}
           <p>{description}</p>
+          <p>{description2}</p>
           <div className={styles.divider} />
 
           {/* <ShowDescription /> */}

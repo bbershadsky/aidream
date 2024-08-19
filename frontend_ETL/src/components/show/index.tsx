@@ -9,12 +9,12 @@ import { Button, Space } from "antd";
 import { CustomAvatar, FullScreenLoading, Text } from "../../components";
 import type { Quote } from "../../graphql/schema.types";
 
-import {
-  ProductsServices,
-  QuotesFormModal,
-  ShowDescription,
-  StatusIndicator,
-} from "../components";
+// import {
+//   ProductsServices,
+//   QuotesFormModal,
+//   ShowDescription,
+//   StatusIndicator,
+// } from "../../components";
 import { QUOTES_GET_QUOTE_QUERY } from "../../pages/quotes/queries";
 // import { CustomAvatar, FullScreenLoading, Text } from "@/components";
 // import type { Quote } from "@/graphql/schema.types";
@@ -27,6 +27,10 @@ import { QUOTES_GET_QUOTE_QUERY } from "../../pages/quotes/queries";
 // } from "../components";
 // import { QUOTES_GET_QUOTE_QUERY } from "../queries";
 import styles from "./index.module.css";
+import { StatusIndicator } from "../status-indicator";
+import { ProductsServices } from "../products-services";
+import { ShowDescription } from "../show-description";
+import { QuotesFormModal } from "../../pages/quotes/components";
 
 const PdfExport = lazy(() => import("../pdf-export"));
 
