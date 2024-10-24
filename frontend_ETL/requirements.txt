@@ -1,2 +1,4 @@
-appwrite>="5.0.3"
-python_dotenv>="0.0.5"
+appwrite>=7.0.0
+python_dotenv>=0.0.5
+requests>=2.32.3
+beautifulsoup4>=4.12.3
