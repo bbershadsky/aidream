@@ -1,6 +1,7 @@
 import { Row, Col } from "antd";
 
 import { MetricCard } from "../../components/metricCard";
+import { PriceChartCard } from "../../components/priceChartCard";
 // import { DealChart } from "../../components/dealChart";
 
 export const Dashboard = () => {
@@ -16,7 +17,8 @@ export const Dashboard = () => {
         <MetricCard variant="669e459d001d91a860c3" />
       </Col>
       <Col span={24}>
-        <h1>Trending Projects</h1>
+        <h1>Favourite Foods</h1>
+        <PriceChartCard/>
         {/* <DealChart /> */}
       </Col>
     </Row>

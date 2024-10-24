@@ -48,6 +48,26 @@ def fetch_page(url):
         logger.error(f'Error fetching the page: {e}')
         return None
 
+# Function to store data in Appwrite
+def store_price_data_in_appwrite(product_id, price, name, productImageUrl, quantity):
+    try:
+        # Insert price data into Appwrite database
+        document = databases.create_document(
+            database_id=database_id,
+            collection_id=collection_id,
+            document_id='unique()',
+            data={
+                "product_id": product_id,
+                "price": price,
+                "name": name,
+                "productImageUrl": productImageUrl,
+                "quantity": quantity,
+            }
+        )
+        logger.debug(f'Successfully stored document: {document}')
+    except Exception as e:
+        logger.error(f'Error storing data in Appwrite: {e}')
+
 # Function to parse the adobeProductData variable from JavaScript
 def parse_adobe_product_data(soup):
     try:
@@ -80,38 +100,37 @@ def parse_adobe_product_data(soup):
         # Extract SKU
         sku_match = re.search(r'SKU:\s*initialize\(([^)]+)\)', adobe_data_script)
         if sku_match:
-            sku = sku_match.group(1)
-            sku = sku.strip('\'"')
+            sku = sku_match.group(1).strip('\'"')
             logger.debug(f'Extracted SKU: {sku}')
         else:
             logger.error('Could not extract SKU.')
             return None
 
+        # Extract name
+        name_match = re.search(r"name:\s*'([^']+)'", adobe_data_script)
+        name = name_match.group(1) if name_match else 'Unknown'
+
+        # Extract productImageUrl
+        image_match = re.search(r"productImageUrl:\s*'([^']+)'", adobe_data_script)
+        productImageUrl = image_match.group(1) if image_match else 'No Image'
+
+        # Extract quantity
+        quantity_match = re.search(r"quantity:\s*(\d+)", adobe_data_script)
+        quantity = int(quantity_match.group(1)) if quantity_match else 1
+
         # Return a dictionary with the data
-        adobe_product_data = {'priceTotal': price, 'SKU': sku}
+        adobe_product_data = {
+            'priceTotal': price,
+            'SKU': sku,
+            'name': name,
+            'productImageUrl': productImageUrl,
+            'quantity': quantity
+        }
         return adobe_product_data
 
     except Exception as e:
         logger.error(f'Error parsing adobeProductData: {e}')
         return None
-
-# Function to store data in Appwrite
-def store_price_data_in_appwrite(product_id, price):
-    try:
-        # Insert price data into Appwrite database
-        document = databases.create_document(
-            database_id=database_id,
-            collection_id=collection_id,
-            document_id='unique()',
-            data={
-                "product_id": product_id,
-                "price": price,
-                # "timestamp": int(time.time())
-            }
-        )
-        logger.debug(f'Successfully stored document: {document}')
-    except Exception as e:
-        logger.error(f'Error storing data in Appwrite: {e}')
 
 # Main script execution
 def main(url):
@@ -126,13 +145,14 @@ def main(url):
     if not adobe_product_data:
         return
 
-    current_price, product_id = adobe_product_data['priceTotal'], adobe_product_data['SKU']
+    current_price, product_id, name, productImageUrl, quantity = adobe_product_data['priceTotal'], adobe_product_data['SKU'], adobe_product_data['name'], adobe_product_data['productImageUrl'], adobe_product_data['quantity']
     if current_price is None or product_id is None:
         return
 
     # Store the price data in Appwrite
-    store_price_data_in_appwrite(product_id, current_price)
+    store_price_data_in_appwrite(product_id, current_price, name, productImageUrl, quantity)
 
 if __name__ == '__main__':
     URL = 'https://www.costco.ca/northfork-meats-elk-ground-meat-454-g-1-lb-x-10-pack.product.100571433.html'
     main(URL)
+
