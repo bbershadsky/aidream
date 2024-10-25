@@ -6,7 +6,7 @@ import { Area, AreaConfig } from "@ant-design/plots";
 export const PriceChartCard = () => {
   const { data, isLoading, isError, error } = useList({
     resource: import.meta.env.VITE_APPWRITE_PRICE_COLLECTION_ID,
-    meta: { fields: ["product_id", "price", "$createdAt", "name", "productImageUrl"] },
+    meta: { fields: ["product_id", "price", "$createdAt", "name", "productImageUrl", "priceMin"] },
   });
 
   if (isError) {
@@ -21,16 +21,17 @@ export const PriceChartCard = () => {
       price: item.price,
       name: item.name,
       productImageUrl: item.productImageUrl,
+      priceMin: item.priceMin,  // Add priceMin field
+      isOnSale: item.priceMin && item.priceMin < item.price,  // Check if the product is on sale
     })) || [];
 
   // Get the first available name and image to use in the chart's legend
   const firstProduct = chartData.find((item) => item.name && item.productImageUrl);
-
-  // Chart configuration
   const config: AreaConfig = {
     data: chartData,
     xField: "timestamp",
     yField: "price",
+    seriesField: "isOnSale",  // Differentiate lines based on whether it's a sale
     xAxis: {
       label: { formatter: (text) => new Date(text).toLocaleDateString() }, // Format the x-axis with date
     },
@@ -48,6 +49,11 @@ export const PriceChartCard = () => {
           <div style={{ padding: "10px" }}>
             <p><strong>Date:</strong> {title}</p>
             <p><strong>Price:</strong> ${currentItem.price}</p>
+            {currentItem.isOnSale && (
+              <p style={{ color: "red" }}>
+                <strong>Sale Price:</strong> ${currentItem.priceMin}
+              </p>
+            )}
             {currentItem.name && (
               <p><strong>Product:</strong> {currentItem.name}</p>
             )}
@@ -62,6 +68,9 @@ export const PriceChartCard = () => {
           </div>
         );
       },
+    },
+    lineStyle: (item: any) => {
+      return item.isOnSale ? { stroke: "red" } : { stroke: "#40a9ff" }; // Change the line color if the product is on sale
     },
     legend: {
       position: "top-right",
